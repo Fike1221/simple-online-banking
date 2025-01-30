@@ -1,0 +1,19 @@
+{% extends 'base_account.html' %}
+
+{% block content %}
+<main>
+    <form action="{{ url_for('withdraw') }}" method="POST">
+        <section>
+            <label for="withdrawal_amount">Amount In Birr: </label>
+            <input type="text" name="withdrawalAmount" id="withdrawal_amount" maxlength="10"minlength="1" required>
+        </section>
+        <section>
+            <label for="pswd">Your Password: </label>
+            <input type="password" name="password" id="pswd" minlength="6" maxlength="14" required>
+        </section>
+        <button type="submit" id="withdraw"> Withdraw </button>  
+    </form>
+    <h2 id="return">Return to your Account? <a href="{{ url_for('my_account') }}">My Account</a></h2>
+</main>
+
+{% endblock %}

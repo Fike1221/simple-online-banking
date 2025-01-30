@@ -1,0 +1,28 @@
+{% extends 'base_account.html' %}
+    {% block content %}
+    <main style="text-align: center">
+        <h2>Made Transaction Easy with FikBk...</h2>
+        <ul class="account-info">
+            
+            <li>Account Holder Name: {{ full_name }}</li>
+            <li>Account Number: {{ account_no }}</li>
+            <li>Balance: {{ balance }} Birr</li>
+            <li>Phone Number: {{ phone_number }}</li>
+            <li>Email Address: {{ email }}</li>
+            <li>Account Created on: {{ date }}</li>
+           
+        </ul>
+        <div>
+            <h2>Make Transaction Here!</h2>
+            <ul class="transact">
+                <li><a href="{{ url_for('deposit')}}" id="deposit">Deposit</a></li>
+                <li><a href="{{ url_for('transfer')}}" id="transfer">Transfer</a></li>
+                <li><a href="{{ url_for('withdraw')}}" id="withdraw">Withdraw</a></li>
+                <li><a href="{{ url_for('transaction_history')}}" id="history">Transaction History</a></li>
+            </ul>
+        </div>
+    </main>
+
+    {% endblock %}
+
+

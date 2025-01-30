@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ head }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='bank.ico') }}">
+</head>
+<body>
+    <nav class="nav">
+        <ul class="list">
+            <li><a href="/main_dashboard">DashBoard</a></li>
+            <li><a href="/register">Register</a></li>
+            <li><a href="/login">LogIn</a></li>
+        </ul>
+    </nav>
+    <div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul id="flashes">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% endwith %}
+    </div>
+
+<script>
+setTimeout(() => {
+    const flashes = document.getElementById('flashes');
+    flashes.style.display = 'none';
+  }, 7000);  // Hides after 5 seconds
+  
+</script>
+</body>
+</html>
+{% block main %}
+{% endblock %}

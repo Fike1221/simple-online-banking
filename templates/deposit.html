@@ -1,0 +1,14 @@
+{% extends 'base_account.html' %}
+
+{% block content %}
+<form action="{{ url_for('deposit') }}" method="POST" id="deposit-form">
+    <section>
+        <label for="deposit_amount">Amount: </label>
+        <input type="text" name="amount" id="deposit_amount" required>
+    </section>
+        <button type="submit" id="deposit"> Deposit </button>
+</form>
+<h2 id="return">Return to your Account? <a href="{{ url_for('my_account') }}">My Account</a></h2>
+
+
+{% endblock %}

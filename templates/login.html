@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block main %}
+{% if error %}
+  <p class="error" id="error"><strong>{{ error }}</strong><span class="clear" id="clear">X</span></p>
+{% endif %}
+<form action="/login" method="POST">
+    <div>
+      <label for="email">Email:  </label><br>
+      <input type="email" name="email" id="email"/>
+    </div>
+    <div>
+      <label for="pswd">Password:   </label><br>
+      <input type="password" name="password" id="pswd"/>
+    </div>
+    <div>
+      <button type="submit">Login</button>
+    </div>
+    <p>Don't  Have an Account? <a href="/register">Register here</a></p>
+  </form>
+  <script>
+    error = document.getElementById('error');
+    clear = document.getElementById('clear');
+  
+    clear.addEventListener('click', () => {
+      error.style.display = "none";
+    });
+  </script>
+{% endblock %}

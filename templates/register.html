@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block main %}
+
+{% if error %}
+  <p class="error" id="error"><strong>{{ error }}</strong><span class="clear" id="clear">X</span></p>
+{% endif %}
+<form action="/register" method="POST">
+  <div>
+    <label for="fname">First Name: </label><br>
+    <input type="text" name="fname" id="fname" required/>
+  </div>
+  <div>
+    <label for="lname">Last Name: </label><br>
+    <input type="text" name="lname" id="lname" required/>
+  </div>
+  <div>
+    <label for="dob">Date of Birth: </label><br>
+    <input type="date" name="dob" id="dob" required/>
+  </div>
+  <div>
+    <label for="phone">Phone Number: </label><br>
+    <input type="tel" name="phone_number" id="phone" maxlength="10" minlength="10"required/>
+  </div>
+  <div>
+    <label for="email">Email:  </label><br>
+    <input type="email" name="email" id="email"/>
+  </div>
+  <div>
+    <label for="pswd">Password:   </label><br>
+    <input type="password" name="password" id="pswd" maxlength="14" minlength="6" required/>
+  </div>
+  <div>
+    <label for="confirm">Confirm Password:   </label><br>
+    <input type="password" name="confirmPassword" id="confirm" maxlength="14" minlength="6" required/>
+  </div>
+  <div>
+    <button type="submit">Register</button>
+  </div>
+  <p>Already Have an Account? <a href="/login">Log In</a></p>
+</form>
+<script>
+  const error = document.getElementById('error');
+  const clear = document.getElementById('clear');
+
+  clear.addEventListener('click', () => {
+    error.style.display = "none";
+  });
+</script>
+{% endblock %}

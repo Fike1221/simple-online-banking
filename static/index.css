@@ -1,0 +1,193 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+.nav-bar {
+    text-align: right;
+    padding: 10px 10px 10px 0;
+    color: white;
+    background-color:rgb(84, 76, 3);
+}
+a {
+    text-decoration: none;
+    font-size: 30px;
+    background-color:rgb(101, 201, 201);
+    padding: 10px;
+    border-radius: 10px;
+}
+span{
+    background-color: black;
+    border-radius: 30px;
+    font-size: 25px;
+    margin-right: 20px;
+    padding: 10px;
+    cursor: pointer;
+
+}
+.header {
+    position: absolute;
+    left: 10px;
+}
+.flashes {
+    list-style: none;
+    /* padding: 10px; */
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: black;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+.flashes li{
+  font-size: 20px;
+  padding: 8px;
+}
+.flashes h1{
+  text-align: right;
+  position: absolute;
+  top: 83px;
+  right: 10px;
+  background-color: crimson;
+  font-size: 20px;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+main{
+  /* margin: 20px auto 20px 60px; */
+  text-align: center;
+}
+main h2{
+  margin-bottom: 40px;
+  font-size: 30px;
+}
+.account-info {
+  margin-left: 60px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 50px;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+li {
+  list-style: none;
+  font-size: 20px;
+  /* text-align: center; */
+  font-weight: bolder;
+}
+/* div {
+  text-align: center;
+} */
+ div h2{
+  margin: 100px;
+ }
+ul.transact {
+  display: flex;
+  gap: 40px;
+  text-align: center;
+  margin-left: 30%;
+}
+#deposit{
+  background-color: chartreuse;
+  font-size: 20px;
+}
+#transfer {
+  background-color: brown;
+  font-size: 20px;
+}
+#withdraw {
+  background-color: greenyellow;
+  font-size: 20px;
+}
+
+#history{
+  font-size: 20px;
+}
+#deposit-form{
+  text-align: center;
+  margin-top: 50px;
+}
+form{
+  margin: 60px;
+  text-align: center;
+}
+form section{
+  font-size: 28px;
+  padding: 15px;
+}
+input{
+  font-size: 20px;
+  padding: 4px;
+  border-radius: 6px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+ button {
+  margin-left: 100px;
+  margin-top: 20px;
+  font-size: 24px;
+  padding: 7px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+ 
+#deposit {
+  background-color:dodgerblue;
+}
+#return {
+  text-align: center;
+}
+#return a{
+  font-size: 24px;
+}
+
+
+/* History */
+table{
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 18px;
+  text-align: left;
+}
+th, td{
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+th{
+  background-color: #f4f4f4;
+}
+
+.remove {
+  cursor: pointer;
+  background-color:chocolate;
+  font-weight: bolder;
+  border-radius: 7px;
+  text-align: center;
+  margin: 5px;
+
+}
+
+.remove:hover{
+  background-color: deeppink;;
+}
+#return-account {
+  margin-top: 50px;
+  text-align: center;
+}
+/* 
+#transfer {
+  background-color:chocolate;
+}
+footer{
+  margin: 100px auto 60px 100px;
+}
+footer h2{
+ font-size: 30px;
+} */
+
+
+  

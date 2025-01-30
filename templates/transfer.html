@@ -1,0 +1,23 @@
+{% extends 'base_account.html' %}
+
+{% block content %}
+<main>
+    <form action="{{ url_for('transfer') }}" method="POST">
+        <section>
+            <label for="rec_account">Reciever Account: </label>
+            <input type="text" name="recAccount" id="rec_account" minlength="10" maxlength="10" required>
+        </section>
+        <section>
+            <label for="transfer_amount">Amount In Birr: </label>
+            <input type="text" name="transferAmount" id="transfer_amount" maxlength="10"minlength="1" required>
+        </section>
+        <section>
+            <label for="pswd">Your Password: </label>
+            <input type="password" name="password" id="pswd" minlength="6" maxlength="14" required>
+        </section>
+        <button type="submit" id="transfer"> Transfer </button>
+    </form>
+    <h2 id="return">Return to your Account? <a href="{{ url_for('my_account') }}">My Account</a></h2>
+</main>
+
+{% endblock %}

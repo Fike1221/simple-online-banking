@@ -1,0 +1,49 @@
+{% extends 'base_account.html' %}
+{% block content %}
+<h2>Transaction History</h2>
+    
+    {% if all_history %}
+    <table>
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>Account ID</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Recievers Account</th>
+                <th>Senders account</th>
+                <th>Date</th>
+                <th class="remove"><p onclick="document.getElementById('body').remove()">Hide All</p></th>
+            </tr>
+        </thead>
+        <tbody id="body">
+            {% for row in all_history %}
+            <tr id="row">
+                <td>{{ row[0] }}</td>  <!-- transaction_id -->
+                <td>{{ row[1] }}</td>  <!-- account_id -->
+                <td>{{ row[2] }}</td>  <!-- transaction_type -->
+                <td>{{ row[3] }}</td>  <!-- transaction_amount -->
+                <td>{% if row[4] %}
+                    {{ row[4] }}
+                    {% else %}
+                    <p>----</p>
+                    {% endif %}
+                </td>  <!-- transaction_date -->
+                <td>{% if row[5] %}
+                    {{ row[5] }}
+                    {% else %}
+                    <p>----</p>
+                    {% endif %}
+                </td>
+                <td>{{ row[6] }}</td>
+                <td class="remove"><p onclick="document.getElementById('row').remove()">Hide</p></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h2 id="return-account">Return to your Account? <a href="{{ url_for('my_account') }}">My Account</a></h2>
+    {% else %}
+    <p>No transactions found.</p>
+    {% endif %}
+
+{% endblock %}

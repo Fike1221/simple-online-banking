@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ head }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='bank.ico') }}">
+</head>
+<body>
+    <div class="nav-bar">
+        <h1 class="header">My Account</h1>
+        <span><strong>Hi, {{ session.name }}</strong></span><a href="/logout">Logout</a>
+    </div><br/>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="flashes" id="flash">
+            {% for message in messages %}
+            <li>{{ message }} </li>
+            {% endfor %}
+            <h1 id="clear">X</h1>
+        </ul>
+        {% endif %}
+        {% endwith %}
+    {% block content %}
+
+    {% endblock %}
+    <script>
+        const flash = document.getElementById('flash');
+        const clear = document.getElementById('clear');
+    
+        clear.addEventListener('click', () => {
+            flash.style.display = "none";
+        })
+    </script>
+</body>
