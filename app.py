@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_mysqldb import MySQL
 import random
 from datetime import datetime
+from send_email import *
 
 
 def random_transaction_id():
@@ -82,7 +83,8 @@ def register():
             account = fetch_account[0]
             mysql.connection.commit()
             cursor.close()
-            
+            # send cofirmation email
+            send_email(email, f"Hi {fname}! Congratulations, You have Successfully created A new Account in Fike-Online-Banking-System. Your Account Number is  {account}, Thankyou For choosing us!", "Regisration Successfull!")
             # redirect the customer to the login page
             flash(f"You have successfully registered! with new Account number : {account}")
             return redirect(url_for('login'))
@@ -116,7 +118,8 @@ def login():
                 session['user_id'] = email
                 session['name'] = email_as_id[0]
                 flash(f"You have successfully loged In! {email_as_id[0]}")
-                # user authenticated and redirect to the page routed as 'my_account' 
+                # user authenticated and redirect to the page routed as 'my_account'
+                 
                 return redirect(url_for('my_account'))
             else:
                 error = "Incorrect Password or You Don't have Registered yet!"
@@ -177,6 +180,10 @@ def deposit():
                     account_number = account_info[0]
                     # increement the balance by the credited amount and insert it to the database back
                     balance = account_info[1] + amount
+
+                    # send email to user
+                    send_email(session['user_id'], f"Your Account Number {account_number} credited {amount} Birr. Thankyou For choosing us!", "Credited!")
+                                            
                     cursor.execute("UPDATE account SET balance=%s WHERE account_id=%s", (balance, account_number))
                     # record the transaction to the transaction_history table in our database
                     cursor.execute("INSERT INTO transaction_history(transaction_id, account_id, transaction_type, transaction_amount, sender_account, transaction_date)"
@@ -186,6 +193,7 @@ def deposit():
                     cursor.close()
                     # prompt to the user about his action
                     flash(f"You have Successfully deposited {amount} to your account number {account_number}")
+                    
 
                 else:
                     flash('amount must be greater than 0 to deposit!')
@@ -203,7 +211,7 @@ def deposit():
 # transfer page
 @app.route('/my_account/transfer', methods=["POST", "GET"])
 def transfer():
-    # try:
+    try:
         # check if there is user loged in else redirect to the login page
         if 'user_id' in session:
             if request.method == "POST":
@@ -249,16 +257,22 @@ def transfer():
                                 cursor.execute("select fname, lname from account, customer where account.email=customer.email and customer.email=%s", (reciever_email,))
                                 reciever_profile = cursor.fetchone()
                                 reciever_name = f"{reciever_profile[0]} {reciever_profile[1]}"
-                                print(reciever_balance)
-                                print(sender_balance)
+
+
+                                # send confirmation email
+                                send_email(session['user_id'], f"You have successfully sent {amount} Birr to {reciever_name}. Thankyou For choosing us!", "Sent!")
+                                send_email(reciever_email, f"You have recieved {amount} Birr from Account Number {sender_account_number}. Thankyou For choosing us!", "Recieved!")
+                                    
                                 # replace the reciever's and sender's balance by the new one
                                 cursor.execute("UPDATE account SET balance=%s WHERE account_id=%s", (reciever_balance, reciever_account_number))
                                 cursor.execute("UPDATE account SET balance=%s WHERE account_id=%s", (sender_balance, sender_account_number))
-                                # record transaction made
+                                
+                                # record transactions made
                                 cursor.execute("INSERT INTO transaction_history(transaction_id, account_id, transaction_type, transaction_amount, reciever_account, transaction_date)"+
                                     " VALUES(%s, %s, %s, %s, %s, %s)", (random_transaction_id(), sender_account_number, "Sent", "-"+str(amount), reciever_account_number, datetime.now()))
                                 cursor.execute("INSERT INTO transaction_history(transaction_id, account_id, transaction_type, transaction_amount, sender_account, transaction_date) "+
                                     "VALUES(%s, %s, %s, %s, %s, %s)", (random_transaction_id(), reciever_account_number, "Recieved", "+"+str(amount), str(sender_account_number), datetime.now()))
+                            
                                 
                                 # apply the changes and close the database
                                 mysql.connection.commit()
@@ -276,12 +290,12 @@ def transfer():
         
         flash("Log in to access the page")
     
-    # except Exception:
-    #    flash("Something Went Wrong! We're Sorry for the inconvenience!")
+    except Exception:
+       flash("Something Went Wrong! We're Sorry for the inconvenience!")
     
     # clear the data stored as cache in the browser and redirect the user to login page
     # session.clear()
-        return redirect(url_for('login'))
+    return redirect(url_for('login'))
 
 # Withdraw
 @app.route('/my_account/withdraw', methods=["POST", "GET"])
@@ -305,7 +319,7 @@ def withdraw():
                 if check_password_hash(password=password, pwhash=fetch_data[0]):
                     # decreement the balance by the withdrawal amount and store it
                     balance -= amount
-
+                    send_email(session['user_id'], f"You have Successfully Withdraw {amount} Birr  from  your Account {account_number}. Thankyou For choosing us!", "Sent!")
                     cursor.execute("UPDATE account SET balance=%s WHERE account_id=%s", (balance, account_number))
                     # record transactions made
                     cursor.execute("INSERT INTO transaction_history(transaction_id, account_id, transaction_type, transaction_amount, transaction_date) VALUES(%s, %s, %s, %s, %s)", (random_transaction_id(), account_number, "Withdrawal", "-"+str(amount), datetime.now()))
