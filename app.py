@@ -18,7 +18,7 @@ def random_account():
 app = Flask(__name__)
 
 # configuring your MySQL server
-app.config["SECRET_KEY"] = "hey47fewod3i4rcmi3rurmxkp23od94jvxz../"
+app.config["SECRET_KEY"] = "..........." # strong combination of numbers alphabets and special characters
 app.config["MYSQL_HOST"] = 'localhost'
 app.config["MYSQL_USER"] = 'root'
 app.config["MYSQL_PASSWORD"] = ''
